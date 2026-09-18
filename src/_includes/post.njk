@@ -1,0 +1,28 @@
+---
+layout: base.njk
+---
+<header id="hdr" style="position:relative;">
+  <a class="logo" href="/"><span class="logo-text">Visu<em>Vox</em></span></a>
+  <div class="hdr-btns">
+    <a href="/blog/" class="btn btn-ghost">← Toutes les actualités</a>
+  </div>
+</header>
+
+<section style="max-width:760px;margin:0 auto;padding:160px 24px 100px;">
+  <p style="color:var(--bleu);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
+    {{ page.date | date("dd MMMM yyyy") }}
+  </p>
+  <h1 style="font-family:'Fraunces',serif;font-size:clamp(28px,5vw,44px);color:var(--blanc);margin:10px 0 24px;line-height:1.15;">
+    {{ title }}
+  </h1>
+  {% if image %}
+  <img src="{{ image }}" alt="{{ title }}" style="width:100%;border-radius:4px;margin-bottom:32px;object-fit:cover;max-height:420px;">
+  {% endif %}
+  <div style="color:var(--gris-c);font-size:16px;line-height:1.8;">
+    {{ content | safe }}
+  </div>
+</section>
+
+<footer style="text-align:center;padding:40px 24px;color:var(--gris-c);font-size:13px;">
+  <a href="/blog/" style="color:var(--bleu);">← Retour aux actualités</a>
+</footer>

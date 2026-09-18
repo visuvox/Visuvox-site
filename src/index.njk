@@ -1,0 +1,752 @@
+---
+layout: base.njk
+title: "VisuVox — Former. Créer. Impacter."
+---
+
+<!-- EDIT TOGGLE -->
+<button class="edit-toggle" onclick="toggleEdit()" title="Mode Edition" id="editBtn" style="display:none;">✏</button>
+<div class="edit-bar" id="editBar">
+  <span>MODE EDITION</span>
+  <small style="color:var(--gris-c);font-size:12px;">Cliquez sur les zones pointillées pour ajouter des images · Cliquez directement sur les titres, noms, postes et bios pour les modifier · Le Google Form pour rejoindre et le lien de don peuvent être modifiés ici</small>
+  <input id="gform-url" placeholder="URL Google Form (Rejoindre comme membre)" style="background:var(--noir);border:1px solid var(--border);color:var(--blanc);padding:8px 12px;font-size:13px;flex:1;min-width:220px;" value="">
+  <button class="btn btn-bleu" onclick="saveGform()" style="padding:8px 16px;font-size:12px;">Enregistrer</button>
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(66,218,254,0.1);border:1px solid var(--bleu);padding:8px 14px;flex-basis:100%;">
+    <span style="color:var(--bleu);font-size:13px;font-weight:700;">🖼 Logo VisuVox :</span>
+    <input type="file" accept="image/*" id="logo-upload" onchange="handleLogo(this)" style="font-size:13px;color:var(--blanc);">
+  </div>
+  <div style="flex-basis:100%;display:flex;align-items:center;gap:12px;background:rgba(66,218,254,0.18);border:1px solid var(--bleu);padding:10px 14px;">
+    <span style="color:var(--blanc);font-size:12.5px;">⚠️ Les images ajoutées ici ne sont pas sauvegardées automatiquement. Une fois vos modifications terminées, cliquez pour télécharger le fichier final :</span>
+    <button class="btn btn-bleu" onclick="exportSite()" style="padding:10px 18px;font-size:12px;white-space:nowrap;">💾 Télécharger le site final</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <a class="logo" href="#hero">
+    <img src="https://i.imgur.com/placeholder.png" id="logo-img" alt="VisuVox" style="height:36px;display:none;">
+    <span class="logo-text">Visu<em>Vox</em></span>
+  </a>
+  <nav>
+    <div class="nav-hub">
+      <span>Découvrir</span>
+      <div class="drop">
+        <a href="#quisommesnous">Qui sommes-nous</a>
+        <a href="#conseil">Conseil d'Administration</a>
+        <a href="#background">Notre Background</a>
+        <a href="#projets">Projets et Initiatives</a>
+      </div>
+    </div>
+    <div class="nav-hub">
+      <span>Apprendre et Créer</span>
+      <div class="drop">
+        <a href="#academy">VisuVox Academy</a>
+        <a href="#fac">Femme à la Caméra</a>
+        <a href="#production">Production Audiovisuelle</a>
+        <a href="#frontieres">Frontières des Femmes</a>
+      </div>
+    </div>
+    <div class="nav-hub">
+      <span>Vivre</span>
+      <div class="drop">
+        <a href="#sommet">Sommet de l'Image</a>
+        <a href="/blog/">Actualités (Blog)</a>
+        <a href="/galerie/">Galerie Photos</a>
+        <a href="#voix">Mur des Voix</a>
+      </div>
+    </div>
+    <div class="nav-hub">
+      <span>Agir</span>
+      <div class="drop">
+        <a href="#rejoindre">Rejoindre comme membre</a>
+        <a href="#soutenir">Nous Soutenir</a>
+        <a href="#postuler">Postuler à une formation</a>
+        <a href="#reactions">Envoyer une réaction</a>
+      </div>
+    </div>
+  </nav>
+  <div class="hdr-btns">
+    <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost">Soutenir</a>
+    <a href="#postuler" class="btn btn-bleu">Postuler</a>
+  </div>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mn-group">
+    <div class="mn-head" onclick="toggleMnGroup(this)">Découvrir <span class="car">▾</span></div>
+    <div class="mn-links">
+      <a href="#quisommesnous" onclick="closeMobileMenu()">Qui sommes-nous</a>
+      <a href="#conseil" onclick="closeMobileMenu()">Conseil d'Administration</a>
+      <a href="#background" onclick="closeMobileMenu()">Notre Background</a>
+      <a href="#projets" onclick="closeMobileMenu()">Projets et Initiatives</a>
+    </div>
+  </div>
+  <div class="mn-group">
+    <div class="mn-head" onclick="toggleMnGroup(this)">Apprendre et Créer <span class="car">▾</span></div>
+    <div class="mn-links">
+      <a href="#academy" onclick="closeMobileMenu()">VisuVox Academy</a>
+      <a href="#fac" onclick="closeMobileMenu()">Femme à la Caméra</a>
+      <a href="#production" onclick="closeMobileMenu()">Production Audiovisuelle</a>
+      <a href="#frontieres" onclick="closeMobileMenu()">Frontières des Femmes</a>
+    </div>
+  </div>
+  <div class="mn-group">
+    <div class="mn-head" onclick="toggleMnGroup(this)">Vivre <span class="car">▾</span></div>
+    <div class="mn-links">
+      <a href="#sommet" onclick="closeMobileMenu()">Sommet de l'Image</a>
+      <a href="/blog/" onclick="closeMobileMenu()">Actualités (Blog)</a>
+      <a href="/galerie/" onclick="closeMobileMenu()">Galerie Photos</a>
+      <a href="#voix" onclick="closeMobileMenu()">Mur des Voix</a>
+    </div>
+  </div>
+  <div class="mn-group">
+    <div class="mn-head" onclick="toggleMnGroup(this)">Agir <span class="car">▾</span></div>
+    <div class="mn-links">
+      <a href="#rejoindre" onclick="closeMobileMenu()">Rejoindre comme membre</a>
+      <a href="#soutenir" onclick="closeMobileMenu()">Nous Soutenir</a>
+      <a href="#postuler" onclick="closeMobileMenu()">Postuler à une formation</a>
+      <a href="#reactions" onclick="closeMobileMenu()">Envoyer une réaction</a>
+    </div>
+  </div>
+  <div class="mn-cta">
+    <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost" style="justify-content:center;" onclick="closeMobileMenu()">Soutenir</a>
+    <a href="#postuler" class="btn btn-bleu" style="justify-content:center;" onclick="closeMobileMenu()">Postuler</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero" style="padding-top:130px;">
+  <div class="hero-img-bg" id="hero-bg">
+    <div class="img-drop-zone" style="height:100%;width:100%;border:none;background:transparent;" id="dz-hero">
+      <input type="file" accept="image/*" onchange="handleImg(this,'dz-hero','hero-bg-img')">
+      <img id="hero-bg-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0.3;">
+      <div class="drop-label" style="color:rgba(66,218,254,0.5);">+ Photo de fond Hero</div>
+    </div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Ouanaminthe · Nord-Est · Haïti · Fondée le 27 Octobre 2024</div>
+    <h1>Former.<br>Créer.<br><em>Impacter.</em></h1>
+    <p class="hero-sub">La plateforme audiovisuelle à impact social qui forme une nouvelle génération de créateurs visuels à Ouanaminthe.</p>
+    <div class="hero-cta">
+      <a href="#academy" class="btn btn-bleu">Découvrir l'Academy</a>
+      <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost">Nous contacter</a>
+    </div>
+    <div class="cdbox">
+      <div class="cd-label">
+        <strong>SOMMET DE L'IMAGE</strong>
+        <span>Premiere Edition Kalfou · Ouanaminthe</span>
+      </div>
+      <div class="cd-units">
+        <div class="cu"><div class="n" id="cd-d">00</div><div class="l">Jours</div></div>
+        <div class="cu"><div class="n" id="cd-h">00</div><div class="l">Heures</div></div>
+        <div class="cu"><div class="n" id="cd-m">00</div><div class="l">Min</div></div>
+        <div class="cu"><div class="n" id="cd-s">00</div><div class="l">Sec</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="n">100+</div><div class="l">Jeunes formés</div></div>
+  <div class="stat"><div class="n">4+</div><div class="l">Formations réalisées</div></div>
+  <div class="stat"><div class="n">15</div><div class="l">Profils Frontières des Femmes</div></div>
+  <div class="stat"><div class="n">2027</div><div class="l">Sommet de l'Image</div></div>
+</div>
+
+<!-- HUB NAVIGATOR -->
+<section class="sec rv">
+  <div class="inner">
+    <div class="eye">Naviguer VisuVox</div>
+    <h2>Quatre chemins. <em>Un seul projet.</em></h2>
+    <p class="lede">Former, créer, vivre et agir à Ouanaminthe. Chaque chemin mène à quelque chose de concret et de réel.</p>
+    <div class="hub-grid">
+      <a class="hub" href="#academy">
+        <div class="hub-num">01 · Apprendre et Créer</div>
+        <h3>VisuVox Academy</h3>
+        <p>Photographie, vidéo, montage, design. Un programme de 6 mois qui transforme des talents en créateurs visuels professionnels.</p>
+        <div class="hub-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+      </a>
+      <a class="hub" href="#sommet">
+        <div class="hub-num">02 · Vivre</div>
+        <h3>Sommet de l'Image</h3>
+        <p>Le premier festival photo professionnel du Nord d'Haïti. Ouanaminthe, capitale de l'image. Aout 2027.</p>
+        <div class="hub-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+      </a>
+      <a class="hub" href="#production">
+        <div class="hub-num">03 · Apprendre et Créer</div>
+        <h3>Production Audiovisuelle</h3>
+        <p>Documentaires, portraits, contenus à impact. Frontières des Femmes en tournage.</p>
+        <div class="hub-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+      </a>
+      <a class="hub" href="mailto:visuvoxhub@gmail.com">
+        <div class="hub-num">04 · Agir</div>
+        <h3>Nous Soutenir</h3>
+        <p>20 USD changent un mois de formation. Votre soutien a un impact direct et mesurable sur des vies réelles à Ouanaminthe.</p>
+        <div class="hub-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ACTUALITES -->
+<section class="sec bg2 rv" id="actualites">
+  <div class="inner">
+    <div class="eye">Actualités et Audiovisuel</div>
+    <h2>Ce qui se passe <em>en ce moment.</em></h2>
+    <p class="lede">Suivez la vie de VisuVox et les actualités du monde audiovisuel et créatif.</p>
+    <div class="blog-grid" style="margin-bottom:40px;">
+      <div class="blog-card">
+        <span class="blog-tag">Tournage</span>
+        <h4>Frontières des Femmes avance sur le terrain</h4>
+        <p>Premiers contacts effectués avec les 15 profils. L'équipe est dans la zone frontalière haïtiano-dominicaine pour les tournages.</p>
+        <div class="blog-date">Septembre 2026</div>
+      </div>
+      <div class="blog-card">
+        <span class="blog-tag">Academy</span>
+        <h4>Première cohorte 6 mois en préparation</h4>
+        <p>VisuVox Academy prépare son programme phare. Photographie, vidéo, montage et design en 4 phases progressives.</p>
+        <div class="blog-date">Septembre 2026</div>
+      </div>
+      <div class="blog-card">
+        <span class="blog-tag">Festival</span>
+        <h4>Sommet de l'Image 2027 annoncé officiellement</h4>
+        <p>Le premier festival photo professionnel du Nord d'Haïti aura lieu les 17, 18 et 19 Aout 2027 à Ouanaminthe.</p>
+        <div class="blog-date">19 Aout 2026</div>
+      </div>
+      <div class="blog-card">
+        <span class="blog-tag">FAC</span>
+        <h4>Femme à la Caméra · 3ème edition annoncée</h4>
+        <p>Dans 6 mois, VisuVox lance la 3ème edition de FAC avec un objectif de 50 participantes. 100% gratuit. Soutenez nous dès aujourd'hui.</p>
+        <div class="blog-date">Octobre 2026</div>
+      </div>
+    </div>
+    <a href="mailto:visuvoxhub@gmail.com" class="btn btn-outline-bleu">Soumettre une actualité</a>
+  </div>
+</section>
+
+<!-- QUI SOMMES-NOUS -->
+<section class="sec rv" id="quisommesnous">
+  <div class="inner">
+    <div class="split">
+      <div>
+        <div class="eye">Découvrir</div>
+        <h2>Une vision. <em>Une mission.</em></h2>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.82;margin-bottom:18px;">En Haïti, des milliers de jeunes possèdent un talent créatif immense. Pourtant, l'accès aux formations professionnelles et aux équipements audiovisuels reste profondément limité.</p>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.82;margin-bottom:18px;">VisuVox a vu le jour pour combler ce fossé. Pas pour former seulement des techniciens — pour révéler des auteurs, des créateurs, des voix.</p>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.82;">Nous évoluons à l'intersection de l'éducation, de la créativité et de l'engagement social. Notre vision : <em style="color:rgba(66,218,254,0.85);font-family:'Fraunces',serif;">"Donner une voix à travers l'image."</em></p>
+        <div class="kpis">
+          <div class="kpi"><div class="n">2024</div><div class="l">Fondation</div></div>
+          <div class="kpi"><div class="n">100+</div><div class="l">Formés</div></div>
+        </div>
+      </div>
+      <div class="simg" id="dz-about-wrap">
+        <div class="img-drop-zone" style="height:100%;border:none;" id="dz-about">
+          <input type="file" accept="image/*" onchange="handleImg(this,'dz-about','about-img')">
+          <img id="about-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <div class="drop-label">+ Photo VisuVox</div>
+          <div class="drop-sub">Equipe, formation, terrain</div>
+        </div>
+        <div class="simg-lbl">Former · Créer · Impacter</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="eye">Nos valeurs</div>
+    <h2 style="margin-bottom:44px;">Ce qui nous <em>anime.</em></h2>
+    <div class="vgrid">
+      <div class="vi"><div class="vi-n">Créativité</div><h4>Un regard propre</h4><p>Chaque jeune formé développe un style et un regard qui lui appartiennent vraiment.</p></div>
+      <div class="vi"><div class="vi-n">Inclusivité</div><h4>Pour tous et toutes</h4><p>Nos formations sont partiellement ou totalement gratuites pour les moins desservis.</p></div>
+      <div class="vi"><div class="vi-n">Engagement</div><h4>Jusqu'au bout</h4><p>Nous nous investissons pleinement dans chaque formation, tournage et communauté.</p></div>
+      <div class="vi"><div class="vi-n">Impact Social</div><h4>Transformation durable</h4><p>L'image comme levier de changement réel pour les jeunes et leurs communautés.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSEIL D'ADMINISTRATION -->
+<section class="sec bg2 rv" id="conseil">
+  <div class="inner">
+    <div class="eye">Gouvernance</div>
+    <h2>Le Conseil <em>d'Administration.</em></h2>
+    <p class="lede">Sept membres engagés qui portent la vision de VisuVox et assurent sa gouvernance au quotidien.</p>
+    <div class="ca-grid">
+      <div class="ca-card">
+        <div class="ca-photo" id="dz-ca1-wrap">
+          <div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca1">
+            <input type="file" accept="image/*" onchange="handleImg(this,'dz-ca1','ca1-img')">
+            <img id="ca1-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            <div class="ca-photo-placeholder">FW</div>
+          </div>
+        </div>
+        <div class="ca-nom">François Wath-Dielmy</div>
+        <div class="ca-poste">Coordonnateur Général</div>
+        <div class="ca-bio">Fondateur de VisuVox. Photographe, vidéaste et formateur audiovisuel. Architecte de valeur créative de l'organisation.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca2"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca2','ca2-img')"><img id="ca2-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RP</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Programmes et Formation</div>
+        <div class="ca-bio">Conception et animation des programmes de formation. Suivi pédagogique des apprenants de VisuVox Academy.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca3"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca3','ca3-img')"><img id="ca3-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RA</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Administratif</div>
+        <div class="ca-bio">Conformité légale, gestion documentaire, ressources humaines et coordination administrative de l'organisation.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca4"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca4','ca4-img')"><img id="ca4-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RF</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Finance</div>
+        <div class="ca-bio">Comptabilité, budget, rapports financiers et conformité avec les exigences des partenaires et bailleurs.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca5"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca5','ca5-img')"><img id="ca5-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RO</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Opérations et Logistique</div>
+        <div class="ca-bio">Mise en oeuvre des activités, gestion des espaces, du matériel et des prestataires de l'organisation.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca6"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca6','ca6-img')"><img id="ca6-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RP</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Production Audiovisuelle</div>
+        <div class="ca-bio">Direction de toutes les productions audiovisuelles. Supervision du pipeline documentaire et des protocoles éthiques.</div>
+      </div>
+      <div class="ca-card">
+        <div class="ca-photo"><div class="img-drop-zone" style="height:100%;width:100%;border:none;border-radius:50%;padding:0;" id="dz-ca7"><input type="file" accept="image/*" onchange="handleImg(this,'dz-ca7','ca7-img')"><img id="ca7-img" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><div class="ca-photo-placeholder">RC</div></div></div>
+        <div class="ca-nom">À compléter</div>
+        <div class="ca-poste">Resp. Communication et Relations Externes</div>
+        <div class="ca-bio">Stratégie de communication, réseaux sociaux, médias et développement des partenariats institutionnels.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUR DES VOIX -->
+<section class="sec rv" id="voix" style="background:linear-gradient(135deg,rgba(66,218,254,0.06),rgba(12,9,10,0)),var(--noir);overflow:hidden;position:relative;">
+  <div class="inner">
+    <div class="eye" style="color:rgba(66,218,254,0.8);">Mur des Voix</div>
+    <h2 style="margin-bottom:14px;">Ce qu'ils disent de <em>VisuVox.</em></h2>
+    <p style="color:var(--gris-c);font-size:16px;margin-bottom:40px;">Témoignages bruts en créole et en français de ceux qui ont vécu VisuVox de l'intérieur.</p>
+    <div class="voix-track">
+      <div class="vc">
+        <p class="vc-q kr">"Anvan VisuVox, mwen pa t konn kenbe yon aparèy. Jodi a, mwen kouvri evènman pwofesyonèlman."</p>
+        <div class="vc-meta"><div class="vc-av"></div><div><div class="vc-name">Ancienne apprenante</div><div class="vc-role">Promotion Femme à la Caméra</div></div></div>
+      </div>
+      <div class="vc">
+        <p class="vc-q">"VisuVox m'a donné les outils. Mais surtout, ca m'a donné le droit de raconter ma propre histoire."</p>
+        <div class="vc-meta"><div class="vc-av"></div><div><div class="vc-name">Apprenant, Promotion 4</div><div class="vc-role">Spécialisation Vidéo</div></div></div>
+      </div>
+      <div class="vc">
+        <p class="vc-q kr">"Nou pa t janm panse Ouanaminthe ta gen pwòp festival foto li. Kounye a, sa posib."</p>
+        <div class="vc-meta"><div class="vc-av"></div><div><div class="vc-name">Partenaire local</div><div class="vc-role">Sommet de l'Image 2026</div></div></div>
+      </div>
+      <div class="vc">
+        <p class="vc-q">"L'approche 70% pratique a tout changé pour moi. J'ai appris en faisant, pas seulement en écoutant."</p>
+        <div class="vc-meta"><div class="vc-av"></div><div><div class="vc-name">Apprenant, Promotion 3</div><div class="vc-role">Spécialisation Photographie</div></div></div>
+      </div>
+      <div class="vc">
+        <p class="vc-q kr">"FAC ban mwen konfyans pou m kenbe kamera a ak fyète, kòm yon fanm, kòm yon kreyatè."</p>
+        <div class="vc-meta"><div class="vc-av"></div><div><div class="vc-name">Apprenante FAC</div><div class="vc-role">Femme à la Caméra Edition 2</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMY -->
+<section class="sec bg2 rv" id="academy">
+  <div class="inner">
+    <div class="eye">Apprendre et Créer · Formation</div>
+    <h2>Apprendre l'image. <em>Changer sa vie.</em></h2>
+    <p class="lede">Un programme intensif de 6 mois, structuré en 4 phases progressives. 70% de pratique. Photographie, vidéo, montage, design.</p>
+    <div class="split" style="margin-bottom:56px;">
+      <div class="tl">
+        <div class="tli"><div class="tl-ph">Phase I</div><h4>Fondamentaux</h4><p>Bases techniques et créatives de l'image, du son et de la narration visuelle. Prise en main des équipements et outils.</p></div>
+        <div class="tli"><div class="tl-ph">Phase II</div><h4>Spécialisation</h4><p>Chaque apprenant approfondit une discipline. Développement d'un regard propre et d'un style personnel.</p></div>
+        <div class="tli"><div class="tl-ph">Phase III</div><h4>Professionnalisation</h4><p>Branding personnel, communication visuelle et préparation à l'insertion économique. Construction du portfolio.</p></div>
+        <div class="tli"><div class="tl-ph">Phase IV</div><h4>Projet final</h4><p>Production audiovisuelle complète en autonomie. Présentation devant un jury. Remise du portfolio et du certificat VisuVox.</p></div>
+      </div>
+      <div class="simg">
+        <div class="img-drop-zone" style="height:100%;border:none;" id="dz-academy">
+          <input type="file" accept="image/*" onchange="handleImg(this,'dz-academy','academy-img')">
+          <img id="academy-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <div class="drop-label">+ Photo Academy</div>
+          <div class="drop-sub">Formation, apprenants, terrain</div>
+        </div>
+        <div class="simg-lbl">VisuVox Academy</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="#postuler" class="btn btn-bleu">Postuler à l'Academy</a>
+      <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost">Plus d'informations</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAC -->
+<section class="sec rv" id="fac">
+  <div class="inner">
+    <div class="eye">Programme phare</div>
+    <h2>Femme à la <em>Caméra.</em></h2>
+    <p class="lede">Une formation entièrement gratuite, dédiée à l'autonomisation des jeunes femmes de Ouanaminthe par l'image.</p>
+    <div class="fac-banner" style="margin-bottom:40px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+        <div>
+          <div style="font-size:12px;color:var(--bleu);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:12px;">3ème Edition · Annonce Officielle</div>
+          <h3 style="font-family:'Fraunces',serif;font-size:28px;margin-bottom:14px;">FAC 3 arrive <em style="color:var(--bleu);font-style:italic;">dans 6 mois.</em></h3>
+          <p style="color:var(--gris-c);font-size:15px;line-height:1.75;margin-bottom:20px;">Objectif : <strong style="color:var(--blanc);">50 participantes</strong>. Programme entièrement gratuit. Photographie, vidéo, storytelling et contenu numérique. Vous pouvez commencer à soutenir cette edition dès aujourd'hui.</p>
+          <a href="mailto:visuvoxhub@gmail.com" class="btn btn-bleu">Soutenir FAC 3</a>
+        </div>
+        <div>
+          <div class="img-drop-zone" style="min-height:220px;" id="dz-fac">
+            <input type="file" accept="image/*" onchange="handleImg(this,'dz-fac','fac-img')">
+            <img id="fac-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <div class="drop-label">+ Photo FAC</div>
+            <div class="drop-sub">Participantes, sessions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vgrid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="vi"><div class="vi-n">Edition 1 et 2</div><h4>Déjà réalisées</h4><p>Deux editions complètes. Des dizaines de femmes de Ouanaminthe formées à la photographie et à la vidéo.</p></div>
+      <div class="vi"><div class="vi-n">100% Gratuit</div><h4>Zéro barrière</h4><p>Aucun frais d'inscription. Matériel fourni. Formation accessible à toutes sans condition économique.</p></div>
+      <div class="vi"><div class="vi-n">Portfolio final</div><h4>Valorisation concrète</h4><p>Chaque participante repart avec un portfolio professionnel et un certificat VisuVox.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTION -->
+<section class="sec bg2 rv" id="production">
+  <div class="inner">
+    <div class="eye">Apprendre et Créer · Production</div>
+    <h2>Des images qui révèlent. <em>Des histoires qui changent.</em></h2>
+    <p class="lede">VisuVox développe et produit des oeuvres audiovisuelles à forte valeur sociale et culturelle.</p>
+    <div class="news-grid" style="margin-bottom:32px;">
+      <div class="nc">
+        <div class="nc-img" id="dz-prod1-wrap">
+          <span class="nc-tag">En cours</span>
+          <div class="img-drop-zone" style="height:100%;border:none;" id="dz-prod1">
+            <input type="file" accept="image/*" onchange="handleImg(this,'dz-prod1','prod1-img')">
+            <img id="prod1-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <div class="drop-label">+ Image</div>
+          </div>
+        </div>
+        <div class="nc-body"><div class="nc-date">2026</div><h4>Frontières des Femmes</h4><p>15 portraits de femmes de la zone frontalière. Documentaire long format. Premiere prévisionnelle 2026.</p></div>
+      </div>
+      <div class="nc">
+        <div class="nc-img"><span class="nc-tag">Série</span><div class="img-drop-zone" style="height:100%;border:none;" id="dz-prod2"><input type="file" accept="image/*" onchange="handleImg(this,'dz-prod2','prod2-img')"><img id="prod2-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image</div></div></div>
+        <div class="nc-body"><div class="nc-date">Récurrent</div><h4>Dèyè Chak Vi</h4><p>Format portrait en 6 étapes. Révéler une vie, une voix, une réalité de Ouanaminthe.</p></div>
+      </div>
+      <div class="nc">
+        <div class="nc-img"><span class="nc-tag">Commande</span><div class="img-drop-zone" style="height:100%;border:none;" id="dz-prod3"><input type="file" accept="image/*" onchange="handleImg(this,'dz-prod3','prod3-img')"><img id="prod3-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image</div></div></div>
+        <div class="nc-body"><div class="nc-date">Sur devis</div><h4>Votre production</h4><p>ONG, institutions, entreprises. VisuVox produit pour vous. Vidéos, documentaires, portraits.</p></div>
+      </div>
+    </div>
+    <a href="mailto:visuvoxhub@gmail.com" class="btn btn-outline-bleu">Commander une production</a>
+  </div>
+</section>
+
+<!-- FRONTIERES DES FEMMES -->
+<section class="sec rv" id="frontieres">
+  <div class="inner">
+    <div class="split">
+      <div>
+        <div class="eye">Production phare · En tournage</div>
+        <h2>Frontières <em>des Femmes.</em></h2>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.82;margin-bottom:24px;">Un documentaire qui donne la parole à quinze femmes de la zone frontalière haïtiano-dominicaine. Commerçante, policière, manbo, leader, survivante — quinze frontières traversées, quinze voix révélées.</p>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.82;margin-bottom:30px;">Un film signé VisuVox. Ancré à Ouanaminthe. Ouvert sur le monde.</p>
+        <div class="kpis" style="margin-bottom:32px;">
+          <div class="kpi"><div class="n">15</div><div class="l">Profils confirmés</div></div>
+          <div class="kpi"><div class="n">2026</div><div class="l">Sortie prévisionnelle</div></div>
+        </div>
+        <a href="mailto:visuvoxhub@gmail.com" class="btn btn-outline-bleu">Soutenir le projet</a>
+      </div>
+      <div class="simg">
+        <div class="img-drop-zone" style="height:100%;border:none;" id="dz-ff">
+          <input type="file" accept="image/*" onchange="handleImg(this,'dz-ff','ff-img')">
+          <img id="ff-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <div class="drop-label">+ Photo du tournage</div>
+          <div class="drop-sub">Sujets, terrain, equipe</div>
+        </div>
+        <div class="simg-lbl">15 femmes · Une frontière · Un seul film</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOMMET DE L'IMAGE -->
+<section class="sec rv" id="sommet" style="background:linear-gradient(160deg,rgba(66,218,254,0.08),rgba(12,9,10,0)),var(--noir);">
+  <div class="inner">
+    <div class="eye">Vivre · Festival</div>
+    <h2>Ouanaminthe. <em>Capitale de l'image.</em></h2>
+    <p class="lede">Le premier festival professionnel de photographie du Nord d'Haïti. Edition Kalfou · 17, 18 et 19 Aout 2027. Journée Mondiale de la Photographie.</p>
+    <div class="agrid" style="margin-bottom:56px;">
+      <div class="ac">
+        <div class="ac-n">01</div>
+        <span class="ac-tag">Exposition · Jour 1</span>
+        <h4>Visages de Ouanaminthe</h4>
+        <div class="img-drop-zone" style="min-height:140px;margin:14px 0;" id="dz-act1"><input type="file" accept="image/*" onchange="handleImg(this,'dz-act1','act1-img')"><img id="act1-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image activité</div></div>
+        <p>9 portraits grand format de figures de la vie quotidienne. Les sujets présents à l'inauguration.</p>
+        <div class="ac-sl">"Ouanaminthe vue par ses visages."</div>
+      </div>
+      <div class="ac">
+        <div class="ac-n">02</div>
+        <span class="ac-tag">Exposition publique · Jour 2</span>
+        <h4>Le Mur des Inconnus</h4>
+        <div class="img-drop-zone" style="min-height:140px;margin:14px 0;" id="dz-act2"><input type="file" accept="image/*" onchange="handleImg(this,'dz-act2','act2-img')"><img id="act2-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image activité</div></div>
+        <p>100 portraits sans nom. Sans légende. La ville se regarde elle-même.</p>
+        <div class="ac-sl">"100 visages. 100 histoires. Une seule ville."</div>
+      </div>
+      <div class="ac">
+        <div class="ac-n">03</div>
+        <span class="ac-tag">Compétition · Jours 2 et 3</span>
+        <h4>La Chasse à l'Image</h4>
+        <div class="img-drop-zone" style="min-height:140px;margin:14px 0;" id="dz-act3"><input type="file" accept="image/*" onchange="handleImg(this,'dz-act3','act3-img')"><img id="act3-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image activité</div></div>
+        <p>Thème révélé le matin. 4 heures de shoot libre. Smartphone autorisé.</p>
+        <div class="ac-sl">"Meme ville. Mille regards."</div>
+      </div>
+      <div class="ac">
+        <div class="ac-n">04</div>
+        <span class="ac-tag">Clôture · Nuit du 19 Aout</span>
+        <h4>La Nuit de l'Image</h4>
+        <div class="img-drop-zone" style="min-height:140px;margin:14px 0;" id="dz-act4"><input type="file" accept="image/*" onchange="handleImg(this,'dz-act4','act4-img')"><img id="act4-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label">+ Image activité</div></div>
+        <p>Projections grand format sur 4 facades. La ville entière devient galerie.</p>
+        <div class="ac-sl">"Quand la lumière parle dans le noir."</div>
+      </div>
+    </div>
+    <div class="eye">Devenir partenaire</div>
+    <h2 style="font-size:36px;margin-bottom:36px;">Rejoindre <em>l'aventure.</em></h2>
+    <div class="tgrid">
+      <div class="tc feat">
+        <div class="tc-ey">Tier 1</div>
+        <h4>Partenaire Fondateur</h4>
+        <div class="tc-price">1 500 USD</div>
+        <ul><li>Nom au titre officiel</li><li>Logo premier plan tous supports</li><li>Prise de parole à l'ouverture</li><li>Stand dédié 3 jours</li></ul>
+        <a href="mailto:visuvoxhub@gmail.com" class="btn btn-bleu">Devenir partenaire</a>
+      </div>
+      <div class="tc">
+        <div class="tc-ey">Tier 2</div>
+        <h4>Partenaire Officiel</h4>
+        <div class="tc-price">400 à 600 USD</div>
+        <ul><li>Logo tous supports</li><li>Mention aux cérémonies</li><li>Publication dédiée réseaux</li></ul>
+        <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost">Nous contacter</a>
+      </div>
+      <div class="tc">
+        <div class="tc-ey">Tier 3</div>
+        <h4>Partenaire Média</h4>
+        <div class="tc-price">100 à 200 USD</div>
+        <ul><li>Logo sur le programme</li><li>Accréditation presse</li><li>Accès conférences</li></ul>
+        <a href="mailto:visuvoxhub@gmail.com" class="btn btn-ghost">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section class="sec bg2 rv" id="background">
+  <div class="inner">
+    <div class="eye">Découvrir · Crédibilité</div>
+    <h2>Ce que nous avons <em>construit.</em></h2>
+    <p class="lede">Des chiffres, des partenaires, des preuves. VisuVox n'est pas une promesse — c'est une institution en mouvement depuis le 27 Octobre 2024.</p>
+    <div class="stats" style="border:1px solid var(--border);">
+      <div class="stat"><div class="n">100+</div><div class="l">Jeunes formés</div></div>
+      <div class="stat"><div class="n">4+</div><div class="l">Editions de formation</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Zones d'intervention</div></div>
+      <div class="stat"><div class="n">2027</div><div class="l">1er festival photo Nord-Haïti</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="eye">Nos partenaires</div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:center;margin-top:20px;">
+      <div style="border:1px solid var(--border);padding:20px 32px;font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--blanc);">RFEO</div>
+      <div style="border:1px solid var(--border);padding:20px 32px;font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--bleu);">Zoom Graphiq</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="sec rv" id="projets">
+  <div class="inner">
+    <div class="eye">Découvrir · Au-delà de la formation</div>
+    <h2>Dans la <em>communauté.</em></h2>
+    <p class="lede">VisuVox agit à travers ses projets et initiatives communautaires à Ouanaminthe et dans le Nord-Est.</p>
+    <div class="vgrid">
+      <div class="vi">
+        <div class="img-drop-zone" style="min-height:120px;margin-bottom:16px;" id="dz-proj1"><input type="file" accept="image/*" onchange="handleImg(this,'dz-proj1','proj1-img')"><img id="proj1-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label" style="font-size:11px;">+ Image</div></div>
+        <div class="vi-n">Formation</div>
+        <h4>EduVox</h4>
+        <p>Formation audiovisuelle pour écoles, universités, ONG et institutions. Programme adapté aux organisations.</p>
+      </div>
+      <div class="vi">
+        <div class="img-drop-zone" style="min-height:120px;margin-bottom:16px;" id="dz-proj2"><input type="file" accept="image/*" onchange="handleImg(this,'dz-proj2','proj2-img')"><img id="proj2-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label" style="font-size:11px;">+ Image</div></div>
+        <div class="vi-n">Archive</div>
+        <h4>Mémoire Visuelle</h4>
+        <p>Documentation photographique systématique de Ouanaminthe. Archive visuelle permanente de la ville.</p>
+      </div>
+      <div class="vi">
+        <div class="img-drop-zone" style="min-height:120px;margin-bottom:16px;" id="dz-proj3"><input type="file" accept="image/*" onchange="handleImg(this,'dz-proj3','proj3-img')"><img id="proj3-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label" style="font-size:11px;">+ Image</div></div>
+        <div class="vi-n">Editions FAC 1 et 2</div>
+        <h4>Femme à la Caméra</h4>
+        <p>Deux editions réalisées. Des femmes de Ouanaminthe autonomisées par la photographie et la vidéo.</p>
+      </div>
+      <div class="vi">
+        <div class="img-drop-zone" style="min-height:120px;margin-bottom:16px;" id="dz-proj4"><input type="file" accept="image/*" onchange="handleImg(this,'dz-proj4','proj4-img')"><img id="proj4-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="drop-label" style="font-size:11px;">+ Image</div></div>
+        <div class="vi-n">Récurrent</div>
+        <h4>Dèyè Chak Vi</h4>
+        <p>Série de portraits en créole haïtien. Une voix, une histoire, une réalité de Ouanaminthe à chaque episode.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REJOINDRE -->
+<section class="sec bg2 rv" id="rejoindre">
+  <div class="inner">
+    <div class="eye">Agir</div>
+    <h2>Rejoindre VisuVox <em>comme membre.</em></h2>
+    <p class="lede">Rejoindre l'organisation en tant que membre actif. Plusieurs portes d'entrée selon votre profil et vos compétences.</p>
+    <div class="rejoin-grid" style="margin-bottom:40px;">
+      <div class="rejoin-card">
+        <h4>Ancien apprenant</h4>
+        <p>Vous avez suivi une formation VisuVox. Rejoignez une commission opérationnelle et contribuez à la croissance de l'organisation.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Candidature membre VisuVox - Ancien apprenant" class="btn btn-bleu">Candidater par email</a>
+      </div>
+      <div class="rejoin-card">
+        <h4>Passionné audiovisuel</h4>
+        <p>Vous avez une passion ou une compétence en photo, vidéo, design ou communication. Votre place est dans l'équipe.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Candidature membre VisuVox - Passionné audiovisuel" class="btn btn-bleu">Candidater par email</a>
+      </div>
+      <div class="rejoin-card">
+        <h4>Devenir formateur</h4>
+        <p>Apportez votre expertise en audiovisuel, design ou communication à nos programmes de formation.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Candidature formateur VisuVox" class="btn btn-outline-bleu">Candidater par email</a>
+      </div>
+      <div class="rejoin-card">
+        <h4>Partenariat institutionnel</h4>
+        <p>ONG, institutions, entreprises. Construisons ensemble un partenariat ancré dans la réalité de Ouanaminthe.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Partenariat institutionnel VisuVox" class="btn btn-outline-bleu">Nous contacter</a>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);background:rgba(66,218,254,0.03);padding:32px;">
+      <div style="font-size:12px;color:var(--bleu);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:12px;">Formulaire Google · Rejoindre comme membre</div>
+      <p style="color:var(--gris-c);font-size:15px;line-height:1.7;margin-bottom:20px;">Remplissez notre formulaire officiel de candidature pour rejoindre VisuVox comme membre actif le 27 Octobre 2026.</p>
+      <a href="#" id="gform-link" class="btn btn-bleu" onclick="openGform(event)">Acceder au formulaire</a>
+      <p style="font-size:12px;color:var(--gris-c);margin-top:12px;">Lien du formulaire à configurer en mode Edition</p>
+    </div>
+  </div>
+</section>
+
+<!-- POSTULER -->
+<section class="sec rv" id="postuler">
+  <div class="inner">
+    <div class="eye">Candidature Formation</div>
+    <h2>Postuler à <em>VisuVox Academy.</em></h2>
+    <p class="lede">Votre candidature sera envoyée directement à notre équipe.</p>
+    <div class="fbox">
+      <form onsubmit="submitForm(event)">
+        <div class="fr"><label>Prénom et Nom</label><input type="text" id="f-nom" placeholder="Votre nom complet" required></div>
+        <div class="fr"><label>Age</label><input type="number" id="f-age" placeholder="Votre âge" required></div>
+        <div class="fr"><label>Commune</label><input type="text" id="f-com" placeholder="Ouanaminthe, Quartier-Morin..." required></div>
+        <div class="fr"><label>Programme souhaité</label>
+          <select id="f-prog" required>
+            <option value="">Choisir un programme</option>
+            <option>VisuVox Academy - Programme 6 mois</option>
+            <option>Femme à la Caméra - Gratuit</option>
+            <option>EduVox - Organisations et ONG</option>
+          </select>
+        </div>
+        <div class="fr"><label>Motivation (3 lignes max)</label><textarea id="f-mot" placeholder="Pourquoi vous voulez rejoindre VisuVox ?" required></textarea></div>
+        <div class="fr"><label>Contact WhatsApp</label><input type="text" id="f-tel" placeholder="+509 ..."></div>
+        <button type="submit" class="btn btn-bleu" style="width:100%;justify-content:center;padding:16px;">Envoyer ma candidature</button>
+        <p id="form-msg" style="font-size:13px;color:var(--bleu);margin-top:12px;display:none;">Votre candidature a été envoyée. Nous vous contacterons bientôt.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SOUTENIR -->
+<section class="sec bg2 rv" id="soutenir">
+  <div class="inner">
+    <div class="eye">Agir</div>
+    <h2>Votre soutien change <em>des vies à Ouanaminthe.</em></h2>
+    <p class="lede">Chaque contribution a un impact direct et mesurable. Voici concrètement ce qu'elle permet.</p>
+    <div class="sgrid" style="margin-bottom:48px;">
+      <div class="sc"><div class="amt">20 USD</div><p>Matériel pédagogique pour un apprenant pendant un mois complet.</p><a href="mailto:visuvoxhub@gmail.com?subject=Don 20 USD VisuVox" class="btn btn-bleu" style="margin-top:16px;padding:10px 18px;font-size:11px;">Contribuer</a></div>
+      <div class="sc"><div class="amt">50 USD</div><p>Une session de formation pratique pour 5 jeunes avec equipement inclus.</p><a href="mailto:visuvoxhub@gmail.com?subject=Don 50 USD VisuVox" class="btn btn-bleu" style="margin-top:16px;padding:10px 18px;font-size:11px;">Contribuer</a></div>
+      <div class="sc"><div class="amt">200 USD</div><p>L'impression de 25 portraits pour Le Mur des Inconnus au Sommet de l'Image.</p><a href="mailto:visuvoxhub@gmail.com?subject=Don 200 USD VisuVox" class="btn btn-bleu" style="margin-top:16px;padding:10px 18px;font-size:11px;">Contribuer</a></div>
+      <div class="sc"><div class="amt">500 USD</div><p>Le parrainage complet d'une femme pour le programme Femme à la Caméra.</p><a href="mailto:visuvoxhub@gmail.com?subject=Don 500 USD VisuVox" class="btn btn-bleu" style="margin-top:16px;padding:10px 18px;font-size:11px;">Contribuer</a></div>
+    </div>
+    <div class="split">
+      <div>
+        <h2 style="font-size:30px;">Vous êtes de la <em>diaspora ?</em></h2>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.8;margin-bottom:24px;">Vous êtes loin, mais Ouanaminthe a besoin de vous. Un don, du matériel envoyé, un mentorat à distance. Chaque geste compte.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Contribution diaspora VisuVox" class="btn btn-bleu">Contribuer depuis la diaspora</a>
+      </div>
+      <div>
+        <h2 style="font-size:30px;">Don en <em>nature.</em></h2>
+        <p style="color:var(--gris-c);font-size:16px;line-height:1.8;margin-bottom:24px;">Appareil photo, caméra, ordinateur, logiciels. Toute contribution matérielle est précieuse et directement utilisée.</p>
+        <a href="mailto:visuvoxhub@gmail.com?subject=Don en nature VisuVox" class="btn btn-ghost">Proposer un don en nature</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REACTIONS -->
+<section class="sec rv" id="reactions">
+  <div class="inner">
+    <div class="eye">Votre voix</div>
+    <h2>Envoyez une <em>réaction.</em></h2>
+    <p class="lede">Une suggestion, un message d'encouragement, une idée ? Tout arrive directement dans notre boite.</p>
+    <div class="react-box">
+      <form onsubmit="submitReaction(event)">
+        <div class="fr"><label>Votre message ou suggestion</label><textarea id="r-msg" placeholder="Partagez votre réaction, une idée, un encouragement..." style="min-height:120px;" required></textarea></div>
+        <div class="fr"><label>Votre nom (optionnel)</label><input type="text" id="r-nom" placeholder="Prénom ou anonyme"></div>
+        <div class="fr"><label>Votre email ou WhatsApp (optionnel)</label><input type="text" id="r-contact" placeholder="Pour qu'on puisse vous répondre"></div>
+        <button type="submit" class="btn btn-bleu" style="width:100%;justify-content:center;padding:16px;">Envoyer ma réaction</button>
+        <p id="react-msg" style="font-size:13px;color:var(--bleu);margin-top:12px;display:none;">Merci pour votre message. Nous l'avons bien recu.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div class="fb">
+      <a class="logo" href="#hero"><span class="logo-text">Visu<em>Vox</em></span></a>
+      <p style="margin-top:16px;">Former. Créer. Impacter. La plateforme audiovisuelle à impact social de Ouanaminthe, Nord-Est, Haïti. Fondée le 27 Octobre 2024.</p>
+    </div>
+    <div class="fc">
+      <h5>Découvrir</h5>
+      <a href="#quisommesnous">Qui sommes-nous</a>
+      <a href="#conseil">Conseil d'Administration</a>
+      <a href="#background">Notre Background</a>
+      <a href="#projets">Projets et Initiatives</a>
+    </div>
+    <div class="fc">
+      <h5>Apprendre et Vivre</h5>
+      <a href="#academy">VisuVox Academy</a>
+      <a href="#fac">Femme à la Caméra</a>
+      <a href="#production">Production</a>
+      <a href="#sommet">Sommet de l'Image</a>
+      <a href="#actualites">Actualités</a>
+    </div>
+    <div class="fc">
+      <h5>Agir</h5>
+      <a href="#rejoindre">Rejoindre comme membre</a>
+      <a href="#soutenir">Nous Soutenir</a>
+      <a href="#postuler">Postuler</a>
+      <a href="#reactions">Envoyer une réaction</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>+509 4274-5964 · visuvoxhub@gmail.com · Ouanaminthe, Haïti · © VisuVox 2026</p>
+    <div class="soc">
+      <a href="https://instagram.com/thevisuvox" target="_blank">@thevisuvox</a>
+      <a href="https://instagram.com/visuvox_academy" target="_blank">@visuvox_academy</a>
+      <a href="https://facebook.com/visuvox_academy" target="_blank">Facebook</a>
+    </div>
+  </div>
+</footer>
+

@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: "Actualités — VisuVox"
+permalink: /blog/index.html
+---
+<header id="hdr" style="position:relative;">
+  <a class="logo" href="/"><span class="logo-text">Visu<em>Vox</em></span></a>
+  <div class="hdr-btns">
+    <a href="/" class="btn btn-ghost">← Accueil</a>
+  </div>
+</header>
+
+<section style="max-width:900px;margin:0 auto;padding:160px 24px 100px;">
+  <p style="color:var(--bleu);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Actualités</p>
+  <h1 style="font-family:'Fraunces',serif;font-size:clamp(28px,5vw,44px);color:var(--blanc);margin:10px 0 40px;">Nos dernières nouvelles</h1>
+
+  {% if collections.posts.length %}
+  <div style="display:flex;flex-direction:column;gap:28px;">
+    {% for post in collections.posts | reverse %}
+    <a href="{{ post.url }}" style="display:flex;gap:20px;text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:28px;">
+      {% if post.data.image %}
+      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:160px;height:110px;object-fit:cover;border-radius:4px;flex-shrink:0;">
+      {% endif %}
+      <div>
+        <p style="color:var(--bleu);font-size:12px;font-weight:700;letter-spacing:1px;">{{ post.date | date("dd MMMM yyyy") }}</p>
+        <h3 style="font-family:'Fraunces',serif;color:var(--blanc);font-size:20px;margin:6px 0;">{{ post.data.title }}</h3>
+        <p style="color:var(--gris-c);font-size:14px;">{{ post.data.excerpt }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--gris-c);">Aucun article pour le moment — revenez bientôt !</p>
+  {% endif %}
+</section>
