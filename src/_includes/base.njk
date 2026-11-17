@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title or "VisuVox — Former. Créer. Impacter." }}</title><link rel="icon" href="/assets/logo.png">
-<meta name="description" content="{{ description or 'VisuVox — Former, créer, impacter par l’image.' }}">
+<title>{{ title or "VisuVox — Former. Créer. Impacter." }}</title>
+<link rel="icon" href="/assets/logo.png">
+<meta name="description" content="{{ description or 'VisuVox — Rassemblement des Femmes Engagées de Ouanaminthe. Former, créer, impacter par l’image.' }}">
 
-<!-- OPEN GRAPH (aperçu sur WhatsApp / Facebook) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ title or 'VisuVox — Former. Créer. Impacter.' }}">
 <meta property="og:description" content="{{ description or 'VisuVox — Rassemblement des Femmes Engagées de Ouanaminthe. Former, créer, impacter par l’image.' }}">
@@ -17,22 +17,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-<!-- GOOGLE ANALYTICS -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-M4TB23V3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
 </head>
 <body>
 {{ content | safe }}
+
+<div style="text-align:center;padding:18px 16px;font-size:13px;border-top:1px solid #2a2a2a;">
+  <a href="/confidentialite/" style="color:#969496;margin:0 10px;">Confidentialité</a>
+  <a href="/conditions/" style="color:#969496;margin:0 10px;">Conditions d'utilisation</a>
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;z-index:5000;background:#141314;border:1px solid #42DAFE;border-radius:6px;padding:16px 20px;color:#fff;font-size:14px;line-height:1.5;">
+  <p style="margin:0 0 12px;">Nous utilisons Google Analytics pour comprendre comment le site est visité. Acceptez-vous ces cookies de mesure d'audience ? <a href="/confidentialite/" style="color:#42DAFE;">En savoir plus</a></p>
+  <button id="cookie-yes" style="background:#42DAFE;color:#0C090A;border:none;padding:9px 18px;font-weight:700;cursor:pointer;margin-right:8px;">Accepter</button>
+  <button id="cookie-no" style="background:none;color:#fff;border:1px solid #969496;padding:9px 18px;cursor:pointer;">Refuser</button>
+</div>
+
+<script>
+(function(){
+  var KEY='visuvox-cookies';
+  var saved=null;
+  try{saved=localStorage.getItem(KEY);}catch(e){}
+  function loadAnalytics(){
+    var s=document.createElement('script');
+    s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=GTM-M4TB23V3';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=function(){dataLayer.push(arguments);};
+    gtag('js',new Date());
+  }
+  var banner=document.getElementById('cookie-banner');
+  function choose(v){
+    try{localStorage.setItem(KEY,v);}catch(e){}
+    banner.style.display='none';
+    if(v==='yes'){loadAnalytics();}
+  }
+  if(saved==='yes'){loadAnalytics();}
+  else if(saved!=='no'){banner.style.display='block';}
+  document.getElementById('cookie-yes').onclick=function(){choose('yes');};
+  document.getElementById('cookie-no').onclick=function(){choose('no');};
+})();
+</script>
+
 <script src="/assets/main.js" defer></script>
 <script>
   if (window.netlifyIdentity) {
