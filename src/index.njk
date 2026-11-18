@@ -3,22 +3,6 @@ layout: base.njk
 title: "VisuVox — Former. Créer. Impacter."
 ---
 
-<!-- EDIT TOGGLE -->
-<button class="edit-toggle" onclick="toggleEdit()" title="Mode Edition" id="editBtn" style="display:none;">✏</button>
-<div class="edit-bar" id="editBar">
-  <span>MODE EDITION</span>
-  <small style="color:var(--gris-c);font-size:12px;">Cliquez sur les zones pointillées pour ajouter des images · Cliquez directement sur les titres, noms, postes et bios pour les modifier · Le Google Form pour rejoindre et le lien de don peuvent être modifiés ici</small>
-  <input id="gform-url" placeholder="URL Google Form (Rejoindre comme membre)" style="background:var(--noir);border:1px solid var(--border);color:var(--blanc);padding:8px 12px;font-size:13px;flex:1;min-width:220px;" value="">
-  <button class="btn btn-bleu" onclick="saveGform()" style="padding:8px 16px;font-size:12px;">Enregistrer</button>
-  <div style="display:flex;align-items:center;gap:8px;background:rgba(66,218,254,0.1);border:1px solid var(--bleu);padding:8px 14px;flex-basis:100%;">
-    <span style="color:var(--bleu);font-size:13px;font-weight:700;">🖼 Logo VisuVox :</span>
-    <input type="file" accept="image/*" id="logo-upload" onchange="handleLogo(this)" style="font-size:13px;color:var(--blanc);">
-  </div>
-  <div style="flex-basis:100%;display:flex;align-items:center;gap:12px;background:rgba(66,218,254,0.18);border:1px solid var(--bleu);padding:10px 14px;">
-    <span style="color:var(--blanc);font-size:12.5px;">⚠️ Les images ajoutées ici ne sont pas sauvegardées automatiquement. Une fois vos modifications terminées, cliquez pour télécharger le fichier final :</span>
-    <button class="btn btn-bleu" onclick="exportSite()" style="padding:10px 18px;font-size:12px;white-space:nowrap;">💾 Télécharger le site final</button>
-  </div>
-</div>
 
 <!-- HEADER -->
 <header id="hdr">
