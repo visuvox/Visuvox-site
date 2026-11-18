@@ -34,8 +34,8 @@ function toggleMnGroup(head){
 }
 
 // EDIT MODE
-const ADMIN_KEY='visuvox2024';
-const ADMIN_PASS='VisuVox#2027';
+const ADMIN_KEY='off-7f3a9c';
+const ADMIN_PASS='off-b81d4e';
 
 function checkAdminAccess(){
   const params=new URLSearchParams(window.location.search);
